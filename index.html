@@ -1,0 +1,97 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SFTP Client</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>SFTP Client</h1>
+        
+        <div class="connection-form">
+            <h2>Connection</h2>
+            <div class="form-group">
+                <label for="host">Host:</label>
+                <input type="text" id="host" placeholder="sftp.example.com">
+            </div>
+            <div class="form-group">
+                <label for="port">Port:</label>
+                <input type="number" id="port" value="22">
+            </div>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" placeholder="your_username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="your_password">
+            </div>
+            <button id="connect-btn">Connect</button>
+            <button id="disconnect-btn" disabled>Disconnect</button>
+        </div>
+
+        <div class="file-explorer">
+            <h2>File Explorer</h2>
+            <div class="path-navigation">
+                <button id="home-btn"><i class="fas fa-home"></i></button>
+                <button id="up-btn"><i class="fas fa-level-up-alt"></i></button>
+                <span id="current-path">/</span>
+            </div>
+            <div class="file-list-container">
+                <table id="file-list">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Size</th>
+                            <th>Modified</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="file-operations">
+            <h2>File Operations</h2>
+            <div class="operation-buttons">
+                <button id="download-btn" disabled>Download</button>
+                <button id="upload-btn" disabled>Upload</button>
+                <input type="file" id="file-upload" style="display: none;">
+                <button id="create-folder-btn" disabled>Create Folder</button>
+                <button id="delete-btn" disabled>Delete</button>
+                <button id="rename-btn" disabled>Rename</button>
+            </div>
+        </div>
+
+        <div class="status">
+            <p id="status-message">Ready to connect</p>
+        </div>
+    </div>
+
+    <!-- Modal for folder creation -->
+    <div id="folder-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Create New Folder</h3>
+            <input type="text" id="folder-name" placeholder="Folder name">
+            <button id="create-folder-confirm">Create</button>
+        </div>
+    </div>
+
+    <!-- Modal for rename -->
+    <div id="rename-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Rename</h3>
+            <input type="text" id="new-name" placeholder="New name">
+            <button id="rename-confirm">Rename</button>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
