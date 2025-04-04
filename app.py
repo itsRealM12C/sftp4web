@@ -262,3 +262,23 @@ def rename():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+from flask import make_response
+
+@app.after_request
+def after_request(response):
+    """Ensure all responses are JSON and have proper CORS headers"""
+    response.headers['Content-Type'] = 'application/json'
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+    return response
+
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'Not found'}), 404
+
+@app.errorhandler(500)
+def internal_error(error):
+    return make_response(jsonify({'error': 'Internal server error'}), 500)
+    
